@@ -1,4 +1,4 @@
-package com.example.numadfa24_zitingwang;
+package com.example.numad24fa_zitingwang;
 
 import org.junit.Test;
 

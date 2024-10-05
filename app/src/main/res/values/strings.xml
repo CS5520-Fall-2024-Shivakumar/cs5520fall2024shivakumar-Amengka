@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">NUMADFa24_ZitingWang</string>
+    <string name="app_name">NUMAD24Fa_ZitingWang</string>
+    <string name="aboutMeBtn">About Me</string>
+    <string name="quickCalcBtn">Quick Calc</string>
 </resources>

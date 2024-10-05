@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.numadfa24_zitingwang"
+    namespace = "com.example.numad24fa_zitingwang"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.numadfa24_zitingwang"
+        applicationId = "com.example.numad24fa_zitingwang"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "NUMADFa24_ZitingWang"
+rootProject.name = "NUMAD24Fa_ZitingWang"
 include(":app")
  
