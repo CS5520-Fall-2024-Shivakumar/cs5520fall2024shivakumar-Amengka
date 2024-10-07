@@ -28,6 +28,7 @@ public class QuickCalc extends AppCompatActivity implements View.OnClickListener
     Button plusBtn, minusBtn, deleteBtn, equalBtn;
     TextView calculatorTextBar;
     Boolean isDefault = true;
+    Boolean resulted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,58 +80,66 @@ public class QuickCalc extends AppCompatActivity implements View.OnClickListener
         String curText;
         switch(view.getId()){
             case R.id.oneBtn:
-                if (isDefault){
+                if (isDefault || resulted){
                     calculatorTextBar.setText("1");
                     isDefault = false;
+                    resulted = false;
                 }
                 else calculatorTextBar.setText(calculatorTextBar.getText() + "1");
                 break;
             case R.id.twoBtn:
-                if (isDefault){
+                if (isDefault || resulted){
                     calculatorTextBar.setText("2");
                     isDefault = false;
+                    resulted = false;
                 }
                 else calculatorTextBar.setText(calculatorTextBar.getText() + "2");
                 break;
             case R.id.threeBtn:
-                if (isDefault){
+                if (isDefault || resulted){
                     calculatorTextBar.setText("3");
                     isDefault = false;
+                    resulted = false;
                 }
                 else calculatorTextBar.setText(calculatorTextBar.getText() + "3");
                 break;
             case R.id.fourBtn:
-                if (isDefault){
+                if (isDefault || resulted){
                     calculatorTextBar.setText("4");
                     isDefault = false;
+                    resulted = false;
                 }
                 else calculatorTextBar.setText(calculatorTextBar.getText() + "4");
                 break;
             case R.id.fiveBtn:
-                if (isDefault){
+                if (isDefault || resulted){
                     calculatorTextBar.setText("5");
                     isDefault = false;
+                    resulted = false;
                 }
                 else calculatorTextBar.setText(calculatorTextBar.getText() + "5");
                 break;
             case R.id.sixBtn:
-                if (isDefault){
+                if (isDefault || resulted){
                     calculatorTextBar.setText("6");
                     isDefault = false;
+                    resulted = false;
                 }
                 else calculatorTextBar.setText(calculatorTextBar.getText() + "6");
                 break;
             case R.id.sevenBtn:
-                if (isDefault){
+                if (isDefault || resulted){
                     calculatorTextBar.setText("7");
                     isDefault = false;
+                    resulted = false;
                 }
                 else calculatorTextBar.setText(calculatorTextBar.getText() + "7");
                 break;
             case R.id.eightBtn:
-                if (isDefault){
+                if (isDefault || resulted){
                     calculatorTextBar.setText("8");
                     isDefault = false;
+                    resulted = false;
                 }
                 else calculatorTextBar.setText(calculatorTextBar.getText() + "8");
                 break;
@@ -219,6 +228,7 @@ public class QuickCalc extends AppCompatActivity implements View.OnClickListener
                 }
 
                 calculatorTextBar.setText(String.valueOf(res));
+                resulted = true;
         }
     }
 
