@@ -2,6 +2,7 @@ package com.example.numad24fa_zitingwang;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,11 +17,17 @@ import androidx.core.view.WindowInsetsCompat;
 
 import org.w3c.dom.Text;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 public class QuickCalc extends AppCompatActivity implements View.OnClickListener {
 
     Button oneBtn, twoBtn, threeBtn, fourBtn, fiveBtn, sixBtn, sevenBtn, eightBtn, nineBtn, zeroBtn;
     Button plusBtn, minusBtn, deleteBtn, equalBtn;
     TextView calculatorTextBar;
+    Boolean isDefault = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,40 +76,149 @@ public class QuickCalc extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
+        String curText;
         switch(view.getId()){
             case R.id.oneBtn:
-                calculatorTextBar.setText(calculatorTextBar.getText() + "1");
+                if (isDefault){
+                    calculatorTextBar.setText("1");
+                    isDefault = false;
+                }
+                else calculatorTextBar.setText(calculatorTextBar.getText() + "1");
                 break;
             case R.id.twoBtn:
-                calculatorTextBar.setText(calculatorTextBar.getText() + "2");
+                if (isDefault){
+                    calculatorTextBar.setText("2");
+                    isDefault = false;
+                }
+                else calculatorTextBar.setText(calculatorTextBar.getText() + "2");
                 break;
             case R.id.threeBtn:
-                calculatorTextBar.setText(calculatorTextBar.getText() + "3");
+                if (isDefault){
+                    calculatorTextBar.setText("3");
+                    isDefault = false;
+                }
+                else calculatorTextBar.setText(calculatorTextBar.getText() + "3");
                 break;
             case R.id.fourBtn:
-                calculatorTextBar.setText(calculatorTextBar.getText() + "4");
+                if (isDefault){
+                    calculatorTextBar.setText("4");
+                    isDefault = false;
+                }
+                else calculatorTextBar.setText(calculatorTextBar.getText() + "4");
                 break;
             case R.id.fiveBtn:
-                calculatorTextBar.setText(calculatorTextBar.getText() + "5");
+                if (isDefault){
+                    calculatorTextBar.setText("5");
+                    isDefault = false;
+                }
+                else calculatorTextBar.setText(calculatorTextBar.getText() + "5");
                 break;
             case R.id.sixBtn:
-                calculatorTextBar.setText(calculatorTextBar.getText() + "6");
+                if (isDefault){
+                    calculatorTextBar.setText("6");
+                    isDefault = false;
+                }
+                else calculatorTextBar.setText(calculatorTextBar.getText() + "6");
                 break;
             case R.id.sevenBtn:
-                calculatorTextBar.setText(calculatorTextBar.getText() + "7");
+                if (isDefault){
+                    calculatorTextBar.setText("7");
+                    isDefault = false;
+                }
+                else calculatorTextBar.setText(calculatorTextBar.getText() + "7");
                 break;
             case R.id.eightBtn:
-                calculatorTextBar.setText(calculatorTextBar.getText() + "8");
+                if (isDefault){
+                    calculatorTextBar.setText("8");
+                    isDefault = false;
+                }
+                else calculatorTextBar.setText(calculatorTextBar.getText() + "8");
                 break;
             case R.id.nineBtn:
-                calculatorTextBar.setText(calculatorTextBar.getText() + "9");
+                if (isDefault){
+                    calculatorTextBar.setText("9");
+                    isDefault = false;
+                }
+                else calculatorTextBar.setText(calculatorTextBar.getText() + "9");
                 break;
             case R.id.zeroBtn:
+                curText = calculatorTextBar.getText().toString();
+                if (curText.isEmpty() || isDefault) break;
+                else if (curText.charAt(curText.length() - 1) == '+' || curText.charAt(curText.length() - 1) == '-') break;
                 calculatorTextBar.setText(calculatorTextBar.getText() + "0");
                 break;
+            case R.id.plusBtn:
+                curText = calculatorTextBar.getText().toString();
+                if (curText.length() == 1 && curText.equals("-")){
+                    calculatorTextBar.setText("0");
+                    isDefault = true;
+                    break;
+                }
+                if (isDefault) break;
+                if (!curText.isEmpty() && curText.charAt(curText.length() - 1) == '+') break;
+                else if (!curText.isEmpty() && curText.charAt(curText.length() - 1) == '-') calculatorTextBar.setText(curText.substring(0, curText.length() - 1) + "+");
+                else if (!curText.isEmpty()) calculatorTextBar.setText(calculatorTextBar.getText() + "+");
+
+                break;
+            case R.id.minusBtn:
+                curText = calculatorTextBar.getText().toString();
+                if (isDefault){
+                    calculatorTextBar.setText("-");
+                    isDefault = false;
+                    break;
+                }
+                if (!curText.isEmpty() && curText.charAt(curText.length() - 1) == '-') break;
+                else if (!curText.isEmpty() && curText.charAt(curText.length() - 1) == '+') calculatorTextBar.setText(curText.substring(0, curText.length() - 1) + "-");
+                else if (!curText.isEmpty()) calculatorTextBar.setText(calculatorTextBar.getText() + "-");
+                else calculatorTextBar.setText("-");
+                break;
             case R.id.deleteBtn:
-                String cur = calculatorTextBar.getText().toString();
-                if (!cur.isEmpty()) calculatorTextBar.setText(cur.substring(0, cur.length() - 1));
+                curText = calculatorTextBar.getText().toString();
+                if (!curText.isEmpty()) calculatorTextBar.setText(curText.substring(0, curText.length() - 1));
+                if (curText.length() == 1){
+                    calculatorTextBar.setText("0");
+                    isDefault = true;
+                }
+                break;
+            case R.id.equalBtn:
+                curText = calculatorTextBar.getText().toString();
+                if (curText.charAt(curText.length() - 1) == '+' || curText.charAt(curText.length() - 1) == '-') break;
+                LinkedList<Long> numbers = new LinkedList<>();
+                LinkedList<Character> operators = new LinkedList<>();
+                String cur = "";
+                for (Character ch : curText.toCharArray()){
+                    if (ch == '+' || ch == '-'){
+                        operators.add(ch);
+                        if (!cur.isEmpty()){
+                            numbers.add(Long.parseLong(cur));
+                            cur = "";
+                        }
+                    }
+                    else {
+                        cur += ch;
+                    }
+                }
+                if (!cur.isEmpty()) numbers.add(Long.parseLong(cur));
+
+                if (operators.size() < numbers.size()) operators.addFirst('+');
+
+                //Testing if all of the nums and operators are stored correctly
+                for (long num: numbers){
+                    Log.i("numbers", String.valueOf(num));
+                }
+
+                for (Character operator: operators){
+                    Log.i("operator", String.valueOf(operator));
+                }
+
+                long res = 0;
+                int index = 0;
+                for (long num: numbers){
+                    if (operators.get(index++) == '+') res += num;
+                    else res -= num;
+                }
+
+                calculatorTextBar.setText(String.valueOf(res));
         }
     }
 
