@@ -159,7 +159,7 @@ public class QuickCalc extends AppCompatActivity implements View.OnClickListener
             case R.id.plusBtn:
                 curText = calculatorTextBar.getText().toString();
                 if (curText.length() == 1 && curText.equals("-")){
-                    calculatorTextBar.setText("0");
+                    calculatorTextBar.setText("CALC");
                     isDefault = true;
                     break;
                 }
@@ -183,9 +183,15 @@ public class QuickCalc extends AppCompatActivity implements View.OnClickListener
                 break;
             case R.id.deleteBtn:
                 curText = calculatorTextBar.getText().toString();
+                if (curText.equals("CALC")) break;
                 if (!curText.isEmpty()) calculatorTextBar.setText(curText.substring(0, curText.length() - 1));
                 if (curText.length() == 1){
-                    calculatorTextBar.setText("0");
+                    calculatorTextBar.setText("CALC");
+                    isDefault = true;
+                }
+                if (resulted){
+                    calculatorTextBar.setText("CALC");
+                    resulted = false;
                     isDefault = true;
                 }
                 break;
