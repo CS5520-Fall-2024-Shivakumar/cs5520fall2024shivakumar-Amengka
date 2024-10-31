@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "Name: Ziting Wang\nEmail: wang.zitin@northeastern.edu", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this, AboutMe.class);
+                startActivity(intent);
             }
         });
 
