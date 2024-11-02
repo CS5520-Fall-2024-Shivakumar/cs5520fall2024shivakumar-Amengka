@@ -2,5 +2,6 @@
     <string name="app_name">NUMAD24Fa_ZitingWang</string>
     <string name="aboutMeBtn">About Me</string>
     <string name="quickCalcBtn">Quick Calc</string>
+    <string name="contactsCollector">Contacts Collector</string>
     <string name="introduction">Name: Ziting Wang\nEmail: wang.zitin@northeastern.edu</string>
 </resources>
