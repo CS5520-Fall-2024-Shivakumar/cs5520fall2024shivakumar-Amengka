@@ -13,13 +13,15 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button aboutMeBtn, quickClacBtn, contactsCollectorBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        Button aboutMeBtn = findViewById(R.id.aboutMeBtn);
+        aboutMeBtn = findViewById(R.id.aboutMeBtn);
 
         aboutMeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        Button quickClacBtn = findViewById(R.id.quickCalcBtn);
+        quickClacBtn = findViewById(R.id.quickCalcBtn);
         quickClacBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button contactsCollectorBtn  = findViewById(R.id.contactsCollectorBtn);
+        contactsCollectorBtn  = findViewById(R.id.contactsCollectorBtn);
         contactsCollectorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
