@@ -1,10 +1,15 @@
 package com.example.numad24fa_zitingwang;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -37,5 +42,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
+    }
+
+    void addContact(String contactName, String contactNumber, View view){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_CONTACTNAME, contactName);
+        cv.put(COLUMN_CONTACTNUMBER, contactNumber);
+
+
+        long result = db.insert(TABLE_NAME, null, cv);
+        if (result == -1){
+            Snackbar.make(view, "Failed", Snackbar.LENGTH_SHORT).show();
+        }
+        else {
+            Snackbar.make(view, "Added Successfully!", Snackbar.LENGTH_SHORT).show();
+        }
     }
 }

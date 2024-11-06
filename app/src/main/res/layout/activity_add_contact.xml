@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/contactNumberINput"
+        android:id="@+id/contactNumberInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -47,7 +47,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contactNumberINput" />
+        app:layout_constraintTop_toBottomOf="@+id/contactNumberInput" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
