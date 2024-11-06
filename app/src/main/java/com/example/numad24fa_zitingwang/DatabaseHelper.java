@@ -2,6 +2,7 @@ package com.example.numad24fa_zitingwang;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.view.View;
@@ -59,5 +60,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else {
             Snackbar.make(view, "Added Successfully!", Snackbar.LENGTH_SHORT).show();
         }
+    }
+
+    Cursor readAllData(){
+        String query = "SELECT * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if (db != null){
+            cursor = db.rawQuery(query, null);
+        }
+
+        return cursor;
     }
 }
