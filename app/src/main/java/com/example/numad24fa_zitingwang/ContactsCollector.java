@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
@@ -24,6 +26,8 @@ public class ContactsCollector extends AppCompatActivity {
 
     RecyclerView recyclerView;
     FloatingActionButton addButton;
+    ImageView emptyImageView;
+    TextView noDataText;
 
     DatabaseHelper db;
     ArrayList<String> contactIDs, contactNames, contactNumbers;
@@ -37,6 +41,8 @@ public class ContactsCollector extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
         addButton = findViewById(R.id.addContactButton);
+        emptyImageView = findViewById(R.id.emptyImageView);
+        noDataText = findViewById(R.id.noDataText);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +82,8 @@ public class ContactsCollector extends AppCompatActivity {
     void storeDataInArrays(){
         Cursor cursor = db.readAllData();
         if(cursor.getCount() == 0){
-            Snackbar.make(findViewById(R.id.main), "No data. ", Snackbar.LENGTH_SHORT).show();
+            emptyImageView.setVisibility(View.VISIBLE);
+            noDataText.setVisibility(View.VISIBLE);
         }
         else {
             while(cursor.moveToNext()){
@@ -84,6 +91,8 @@ public class ContactsCollector extends AppCompatActivity {
                 contactNames.add(cursor.getString((1)));
                 contactNumbers.add(cursor.getString(2));
             }
+            emptyImageView.setVisibility(View.GONE);
+            noDataText.setVisibility(View.GONE);
         }
     }
 }

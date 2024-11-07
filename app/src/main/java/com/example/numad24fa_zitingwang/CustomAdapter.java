@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +21,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private Context context;
     Activity activity;
     private ArrayList<String> contactIDs, contactNames, contactNumbers;
+
+    Animation translateAnim;
 
     CustomAdapter(Activity activity, Context context, ArrayList<String> contactIDs, ArrayList<String> contactNames, ArrayList<String> contactNumbers){
         this.activity = activity;
@@ -66,6 +70,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             contactNameText = itemView.findViewById(R.id.contactNameText);
             contactNumberText = itemView.findViewById(R.id.contactNumberText);
             mainLayout = itemView.findViewById(R.id.mainLayout);
+            // animate recyclerView
+            translateAnim = AnimationUtils.loadAnimation(context, R.anim.translate_anim);
+            mainLayout.setAnimation(translateAnim);
         }
     }
 }
