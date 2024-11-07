@@ -20,17 +20,20 @@
         <activity
             android:name=".ContactUpdateAndDial"
             android:parentActivityName=".ContactsCollector"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".AddContact"
             android:exported="false"
             android:label="Add Contact"
-            android:parentActivityName=".ContactsCollector" />
+            android:parentActivityName=".ContactsCollector"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ContactsCollector"
             android:exported="false"
             android:label="Contacts Collector"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".AboutMe"
             android:exported="false"

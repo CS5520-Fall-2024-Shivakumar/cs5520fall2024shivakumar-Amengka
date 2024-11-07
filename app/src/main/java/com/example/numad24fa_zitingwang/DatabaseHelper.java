@@ -56,10 +56,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         long result = db.insert(TABLE_NAME, null, cv);
         if (result == -1){
-            Snackbar.make(view, "Failed", Snackbar.LENGTH_SHORT).show();
+            Snackbar snackbar = Snackbar.make(view, "Failed to Add", Snackbar.LENGTH_SHORT);
+            snackbar.setAction("Close", v->{
+                snackbar.dismiss();;
+            }).show();
         }
         else {
-            Snackbar.make(view, "Added Successfully!", Snackbar.LENGTH_SHORT).show();
+            Snackbar snackbar = Snackbar.make(view, "Successfully Added!", Snackbar.LENGTH_SHORT);
+            snackbar.setAction("Close", v->{
+                snackbar.dismiss();;
+            }).show();
         }
     }
 
@@ -83,10 +89,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
         if (result == -1){
-            Snackbar.make(view, "Failed to Update", Snackbar.LENGTH_SHORT).show();
+            Snackbar snackbar = Snackbar.make(view, "Failed to Update", Snackbar.LENGTH_SHORT);
+            snackbar.setAction("Close", v->{
+                snackbar.dismiss();;
+            }).show();
         }
-        else {
-            Snackbar.make(view, "Successfully Update!", Snackbar.LENGTH_SHORT).show();
+        else{
+            Snackbar snackbar = Snackbar.make(view, "Successfully Updated!", Snackbar.LENGTH_SHORT);
+            snackbar.setAction("Close", v->{
+                snackbar.dismiss();;
+            }).show();
         }
     }
 
@@ -94,10 +106,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_id});
         if (result == -1){
-            Snackbar.make(view, "Failed to Delete", Snackbar.LENGTH_SHORT).show();
+            Snackbar snackbar = Snackbar.make(view, "Failed to Delete", Snackbar.LENGTH_SHORT);
+            snackbar.setAction("Close", v->{
+                snackbar.dismiss();;
+            }).show();
         }
         else {
-            Snackbar.make(view, "Successfully Deleted!", Snackbar.LENGTH_SHORT).show();
+            Snackbar snackbar = Snackbar.make(view, "Successfully Deleted!", Snackbar.LENGTH_SHORT);
+            snackbar.setAction("Close", v->{
+                snackbar.dismiss();;
+            }).show();
         }
     }
 }
