@@ -28,7 +28,7 @@ public class AddContact extends AppCompatActivity {
         contactNumberInput = findViewById(R.id.contactNumberInput);
         addButton = findViewById(R.id.addButton);
 
-        View view = findViewById(R.id.main);
+//        View view = findViewById(R.id.main);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override

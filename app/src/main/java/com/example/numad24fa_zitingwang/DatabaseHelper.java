@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -24,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_CONTACTNUMBER = "contact_number";
 
 
-    public DatabaseHelper(@Nullable Context context) {
+    DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
@@ -72,5 +73,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         return cursor;
+    }
+
+    void updateData(String row_id, String contactName, String contactNumber, View view){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_CONTACTNAME, contactName);
+        cv.put(COLUMN_CONTACTNUMBER, contactNumber);
+
+        long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
+        if (result == -1){
+            Snackbar.make(view, "Failed to Update", Snackbar.LENGTH_SHORT).show();
+        }
+        else {
+            Snackbar.make(view, "Successfully Update!", Snackbar.LENGTH_SHORT).show();
+        }
+    }
+
+    void deleteOneRow(String row_id, View view){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_id});
+        if (result == -1){
+            Snackbar.make(view, "Failed to Delete", Snackbar.LENGTH_SHORT).show();
+        }
+        else {
+            Snackbar.make(view, "Successfully Deleted!", Snackbar.LENGTH_SHORT).show();
+        }
     }
 }
