@@ -2,6 +2,9 @@ package com.example.numad24fa_zitingwang;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -13,6 +16,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -22,7 +27,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class ContactUpdateAndDial extends AppCompatActivity {
 
     EditText contactNameInput, contactNumberInput;
-    Button updateButton, deleteButton;
+    Button dialButton, updateButton, deleteButton;
 
     String contactID, contactName, contactNumber;
 
@@ -35,6 +40,7 @@ public class ContactUpdateAndDial extends AppCompatActivity {
         View mainView = findViewById(R.id.main);
         contactNameInput = findViewById(R.id.contactNameInputUpdate);
         contactNumberInput = findViewById(R.id.contactNumberInputUpdate);
+        dialButton = findViewById(R.id.DialButton);
         updateButton = findViewById(R.id.updateButton);
         deleteButton = findViewById(R.id.deleteButton);
 
@@ -42,6 +48,13 @@ public class ContactUpdateAndDial extends AppCompatActivity {
 
         ActionBar ab = getSupportActionBar();
         if (ab != null) ab.setTitle(contactName);
+
+        dialButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                confirmDialogDial();
+            }
+        });
 
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +71,7 @@ public class ContactUpdateAndDial extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                confirmDialog(view);
+                confirmDialogDelete(view);
             }
         });
 
@@ -85,7 +98,36 @@ public class ContactUpdateAndDial extends AppCompatActivity {
         }
     }
 
-    void confirmDialog(View view){
+    void confirmDialogDial(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Call " + contactName + " ?");
+        builder.setMessage("Are you sure you want to Call " + contactName + " ?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String number = contactNumberInput.getText().toString();
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:" + number));
+
+                if (ContextCompat.checkSelfPermission(ContactUpdateAndDial.this, android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                    startActivity(intent);
+                } else {
+                    // Request permission if it hasn't been granted
+                    ActivityCompat.requestPermissions(ContactUpdateAndDial.this, new String[]{android.Manifest.permission.CALL_PHONE}, 1);
+                }
+//                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.create().show();
+    }
+
+    void confirmDialogDelete(View view){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete " + contactName + " ?");
         builder.setMessage("Are you sure you want to delete " + contactName + " ?");
